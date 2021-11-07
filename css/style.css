@@ -141,13 +141,18 @@ table {
 }
 
 .container {
-  max-width: 600px;
+  max-width: 800px;
   width: 100%;
   margin: 0 auto;
 }
 
 .row {
   display: flex;
+  cursor:pointer;
+}
+
+.dashboard__item:hover {
+  background-color: #393b42;
 }
 
 .col {
@@ -155,7 +160,7 @@ table {
   display: flex;
   flex-direction: column;
   padding: 15px 0;
-  border-bottom: 1px solid #ccc;
+  border-bottom: rgba(163, 163, 163,0.1) solid 1px;
   text-align: center;
 }
 
@@ -178,7 +183,7 @@ body {
   font-size: 22px;
   text-transform: uppercase;
   text-align: center;
-  padding: 20px;
+  padding: 30px;
 }
 
 /*---------Search--------*/
@@ -190,7 +195,7 @@ body {
   width: 100%;
   padding: 15px 16px;
   background-color: #292b3369;
-  border: 1px solid #2e313a;
+  border: 2px solid #2e313a;
   font-size: 18px;
   color: #999fb2;
 }
@@ -215,4 +220,26 @@ body {
 .country {
   color: #999fb2;
   text-align: left;
+}
+
+/*--------Tabs--------*/
+.switcher{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  border-top: 1px solid #2e313a;
+}
+
+.tab__item{
+  color: #8f8f8f;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  font-size: 22px;
+  padding: 25px;
+  flex: 1;
+  background-color: #24262e;
+}
+.active {
+  background-color: #292b33;
 }

@@ -1,9 +1,9 @@
-let lang = 'en';
-let type = 'world';
+let lang = "en";
+let type = "world";
 let DATA = {}; //DATA = {ukraine: [{}...], world: [{}...]}
 let dashboardData = [];
-const dashboardEl = document.getElementById('dashboard');
-const dashboardBodyEl = document.getElementById('dashboardBody');
+const dashboardEl = document.getElementById("dashboard");
+const dashboardBodyEl = document.getElementById("dashboardBody");
 const searchFormEl = document.getElementById("searchForm");
 
 //"точка входа приложения", получение данных с сервера"
@@ -11,7 +11,7 @@ getData();
 
 function createDashboardRows(dataArray) {
   //console.log(dataArray.map((data) => createDashboardRow(data)).join(''));
-  return dataArray.map((data) => createDashboardRow(data)).join('');
+  return dataArray.map((data) => createDashboardRow(data)).join("");
 }
 
 function createDashboardRow(data) {
@@ -43,7 +43,7 @@ function formatDeltaValue(delta) {
   } else if (delta < 0) {
     return `&#9660; ${delta}`;
   } else {
-    return '-';
+    return "-";
   }
 } // return "up"number || "down"-number || "-"
 
@@ -57,7 +57,7 @@ function render(htmlStr, htmlEl, insertTo) {
 
 async function getData() {
   //получить дату в JSON виде ('yyyy-mm-dd')
-  const now = new Date().toJSON().split('T')[0];
+  const now = new Date().toJSON().split("T")[0];
   //блок обработки ошибок запроса на получение данных
   try {
     const res = await fetch(`https://api-covid19.rnbo.gov.ua/data?to=${now}`);
@@ -76,18 +76,12 @@ async function getData() {
   }
 }
 
-
-
-
-//Search by form
+//Search by user input
 searchFormEl.addEventListener("input", (e) => {
   e.preventDefault();
   const searchRegion = e.target.value.trim().toLowerCase();
   const filteredRegion = dashboardData.filter((region) => {
-      return (
-        region.label[lang].toLowerCase().includes(searchRegion)
-      );
+    return region.label[lang].toLowerCase().includes(searchRegion);
   });
   render(createDashboardRows(filteredRegion), dashboardBodyEl);
 });
-
