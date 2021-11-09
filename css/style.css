@@ -141,20 +141,22 @@ table {
   width: 7px;
   height: 7px;
 }
+
 /* Track */
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #aac1ca;
+  background: #3b3b3b;
   border-radius: 5px;
 }
+
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #99b5c1;
+  background: #3b3b3b;
 }
-
 
 
 *,
@@ -169,13 +171,17 @@ table {
 
 .container {
   max-width: 650px;
+  flex-grow: 1;
+  height: 100%;
   width: 100%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .row {
   display: flex;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .dashboard__item:hover {
@@ -187,7 +193,7 @@ table {
   display: flex;
   flex-direction: column;
   padding: 15px 5px;
-  border-bottom: rgba(163, 163, 163,0.1) solid 1px;
+  border-bottom: rgba(163, 163, 163, 0.1) solid 1px;
   text-align: center;
 }
 
@@ -200,6 +206,30 @@ body {
   color: #c6c7c7;
   font-size: 18px;
   background-color: #24262e;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+span {
+  padding: 4px 0;
+}
+
+.dashboard {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard__body {
+  flex: 1 1 0;
+  overflow-y: auto;
 }
 
 .dashboard__header div:first-child {
@@ -207,38 +237,52 @@ body {
 }
 
 .main__title {
-  font-size: 22px;
+  font-size: 24px;
   text-transform: uppercase;
   text-align: center;
   padding: 30px;
 }
 
 /*---------Search--------*/
+.form {
+  padding: 20px 0;
+}
+
 .search__form {
-  padding: 16px 0;
+  display: flex;
+  align-items: center;
+  border: 2px solid #2e313a;
+}
+
+.form__icon {
+  padding: 0 10px;
 }
 
 .search__input {
   width: 100%;
   padding: 15px 16px;
   background-color: #292b3369;
-  border: 2px solid #2e313a;
+  border: 0;
+  border-left: 1px solid rgb(68, 68, 68);
   font-size: 18px;
   color: #999fb2;
 }
 
 /*---------Statistics--------*/
-.totals{
-  padding: 10px 0;
+.totals {
+  padding: 10px 15px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   background-color: #292b33;
+  font-size: 20px;
 }
-.total__item{
+
+.total__item {
   padding: 10px 0;
   display: flex;
   flex-direction: column;
 }
+
 .confirmed {
   color: #ffc538;
 }
@@ -261,13 +305,13 @@ body {
 }
 
 /*--------Tabs--------*/
-.switcher{
+.switcher {
   display: flex;
   align-items: flex-start;
   justify-content: center;
 }
 
-.switcher__tab{
+.switcher__tab {
   color: #8f8f8f;
   cursor: pointer;
   display: flex;
