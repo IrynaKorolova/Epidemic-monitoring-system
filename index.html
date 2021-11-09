@@ -20,20 +20,23 @@
   <main class="main">
     <div class="container">
 
-      <div class="switcher">
-        <div class="tab__item">
+      <div class="switcher" id="switcher">
+        <button class="switcher__tab" data-key="ukraine">
           <span>Ukraine</span>
           <span class="total-confirmed">0</span>
-        </div>
-        <div class="tab__item active">
+        </button>
+        <button class="switcher__tab switcher__tab_active" data-key="world">
           <span>World</span>
           <span class="total-confirmed">0</span>
-        </div>
+        </button>
       </div>
 
-
+      <div class="totals" id="totals">
+      
+      </div>
 
       <form class="search__form" id="searchForm">
+        <i>&#128269;</i>
         <input class="search__input" type="search" name="search" placeholder="Search by region" />
       </form>
 
