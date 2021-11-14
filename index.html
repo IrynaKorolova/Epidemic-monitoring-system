@@ -35,18 +35,18 @@
       </div>
 
       <div class="form">
-      <form class="search__form" id="searchForm">
-        <i class="form__icon">&#128269;</i>
-        <input class="search__input" type="search" name="search" placeholder="Search by region" />
-      </form>
-    </div>
+        <form class="search__form" id="searchForm">
+          <i class="form__icon">&#128269;</i>
+          <input class="search__input" type="search" name="search" placeholder="Search by region" />
+        </form>
+      </div>
       <article class="dashboard" id="dashboard">
         <header class="dashboard__header row">
-          <div class="col">Country</div>
-          <div class="col">Confirmed</div>
-          <div class="col">Deaths</div>
-          <div class="col">Recovered</div>
-          <div class="col">Existing</div>
+          <div data-sorting="0" data-key="label" data-order="-1" class="col dashboard__sort-btn">Country</div>
+          <div data-sorting="1" data-key="confirmed" data-order="-1" class="col dashboard__sort-btn">Confirmed</div>
+          <div data-sorting="0" data-key="deaths" data-order="-1" class="col dashboard__sort-btn">Deaths</div>
+          <div data-sorting="0" data-key="recovered" data-order="-1" class="col dashboard__sort-btn">Recovered</div>
+          <div data-sorting="0" data-key="existing" data-order="-1" class="col dashboard__sort-btn">Existing</div>
         </header>
         <section class="dashboard__body" id="dashboardBody">
 

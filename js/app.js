@@ -38,6 +38,49 @@ const formatter = new Intl.NumberFormat("uk", {
 //"точка входа приложения", получение данных с сервера"
 getData();
 
+dashboardEl.addEventListener("click", (e) => {
+  const sortBtn = e.target.closest(".dashboard__sort-btn");
+  if (sortBtn) {
+    let { sorting, order, key } = sortBtn.dataset;
+    if (sorting === "1") {
+      order *= -1;
+    } else {
+      order = -1;
+      sorting = 1;
+      const sortBtns = [...sortBtn.parentElement.children];
+      sortBtns.forEach((btn) => {
+        if (btn !== sortBtn) {
+          btn.dataset.sorting = 0;
+        }
+      });
+    }
+    sortBtn.dataset.order = order;
+    sortBtn.dataset.sorting = sorting;
+
+    if (key === "label") {
+      dashboardData.sort((dataA, dataB) => {
+        return dataA[key][lang].localeCompare(dataB[key][lang]) * order;
+      });
+    } else {
+      dashboardData.sort((dataA, dataB) => {
+        return (dataA[key] - dataB[key]) * order;
+      });
+    }
+    render(createDashboardRows(dashboardData), dashboardBodyEl);
+  }
+});
+
+// const o1 = {
+//   name: 'Ivan',
+//   address: {
+//     city: 'Lviv'
+//   }
+// }
+
+// const o2 = {...o1}
+
+// o2.address.city = 'Kiev'
+
 //tabs switcher
 switcherEl.addEventListener("click", (e) => {
   const btn = e.target.closest(".switcher__tab");
@@ -101,7 +144,7 @@ function render(htmlStr, htmlEl, insertTo) {
     htmlEl.innerHTML = htmlStr;
   }
 }
-
+let dashboardData2 = [];
 async function getData() {
   //получить дату в JSON виде ('yyyy-mm-dd')
   const now = new Date().toJSON().split("T")[0];
@@ -112,12 +155,15 @@ async function getData() {
       throw new Error(`${res.status}`);
     }
     const data = await res.json(); //data = {ukraine: [{}...], world: [{}...]}
-    // console.log('DATA (Object)', data);
+    console.log("DATA (Object)", data);
     DATA = data;
     dashboardData = DATA[type];
     summarize(DATA);
     // console.log('dashboardData (Array)', dashboardData);
     render(createDashboardRows(dashboardData), dashboardBodyEl);
+
+    // dashboardData2 = JSON.parse(JSON.stringify(dashboardData))
+    // console.log(dashboardData === dashboardData2);
   } catch (error) {
     alert(error);
     console.warn(error);
@@ -156,9 +202,7 @@ function renderTotals() {
   <div>
   <div>Confirmed:</div>
   <div class="total__item confirmed">
-  <span>${formatter.format(
-    totalCounters[type].confirmed
-  )}</span>
+  <span>${formatter.format(totalCounters[type].confirmed)}</span>
   <span>${formatDeltaValue(totalCounters[type].delta_confirmed)}</span>
   </div>
   </div>
@@ -172,18 +216,14 @@ function renderTotals() {
   <div>
   <div>Recovered:</div>
   <div class="total__item recovered">
-  <span>${formatter.format(
-    totalCounters[type].recovered
-  )}</span>
+  <span>${formatter.format(totalCounters[type].recovered)}</span>
   <span>${formatDeltaValue(totalCounters[type].delta_recovered)}</span>
   </div>
   </div>
   <div>
   <div>Existing:</div>
   <div class="total__item existing">
-  <span>${formatter.format(
-    totalCounters[type].existing
-  )}</span>
+  <span>${formatter.format(totalCounters[type].existing)}</span>
   <span>${formatDeltaValue(totalCounters[type].delta_existing)}</span>
   </div>
   </div>
