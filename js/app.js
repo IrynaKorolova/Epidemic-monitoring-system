@@ -1,6 +1,6 @@
 let lang = "en";
 let type = "world";
-let DATA = {}; //DATA = {ukraine: [{}...], world: [{}...]}
+let DATA = {};
 let dashboardData = [];
 const dashboardEl = document.getElementById("dashboard");
 const dashboardBodyEl = document.getElementById("dashboardBody");
@@ -30,12 +30,10 @@ const totalCounters = {
   },
 };
 
-//numbers formatting
 const formatter = new Intl.NumberFormat("uk", {
   useGrouping: "true",
 });
 
-//"точка входа приложения", получение данных с сервера"
 getData();
 
 dashboardEl.addEventListener("click", (e) => {
@@ -70,18 +68,6 @@ dashboardEl.addEventListener("click", (e) => {
   }
 });
 
-// const o1 = {
-//   name: 'Ivan',
-//   address: {
-//     city: 'Lviv'
-//   }
-// }
-
-// const o2 = {...o1}
-
-// o2.address.city = 'Kiev'
-
-//tabs switcher
 switcherEl.addEventListener("click", (e) => {
   const btn = e.target.closest(".switcher__tab");
   if (btn) {
@@ -99,7 +85,6 @@ switcherEl.addEventListener("click", (e) => {
 });
 
 function createDashboardRows(dataArray) {
-  //console.log(dataArray.map((data) => createDashboardRow(data)).join(''));
   return dataArray.map((data) => createDashboardRow(data)).join("");
 }
 
@@ -135,7 +120,7 @@ function formatDeltaValue(delta = 0) {
   } else {
     return "-";
   }
-} // return "up"number || "down"-number || "-"
+}
 
 function render(htmlStr, htmlEl, insertTo) {
   if (insertTo) {
@@ -146,31 +131,26 @@ function render(htmlStr, htmlEl, insertTo) {
 }
 let dashboardData2 = [];
 async function getData() {
-  //получить дату в JSON виде ('yyyy-mm-dd')
   const now = new Date().toJSON().split("T")[0];
-  //блок обработки ошибок запроса на получение данных
+
   try {
     const res = await fetch(`https://api-covid19.rnbo.gov.ua/data?to=${now}`);
     if (!res.ok) {
       throw new Error(`${res.status}`);
     }
-    const data = await res.json(); //data = {ukraine: [{}...], world: [{}...]}
+    const data = await res.json();
     console.log("DATA (Object)", data);
     DATA = data;
     dashboardData = DATA[type];
     summarize(DATA);
-    // console.log('dashboardData (Array)', dashboardData);
-    render(createDashboardRows(dashboardData), dashboardBodyEl);
 
-    // dashboardData2 = JSON.parse(JSON.stringify(dashboardData))
-    // console.log(dashboardData === dashboardData2);
+    render(createDashboardRows(dashboardData), dashboardBodyEl);
   } catch (error) {
     alert(error);
     console.warn(error);
   }
 }
 
-//Search by user input
 searchFormEl.addEventListener("input", (e) => {
   const searchRegion = e.target.value.trim().toLowerCase();
   const filteredRegion = dashboardData.filter((region) => {
@@ -196,7 +176,6 @@ function renderTabs() {
   `;
 }
 
-//render total sum of diseased
 function renderTotals() {
   totalsEl.innerHTML = `
   <div>
@@ -230,7 +209,6 @@ function renderTotals() {
   `;
 }
 
-//counting total sum of diseased
 function summarize(dataObj) {
   const types = ["world", "ukraine"];
   types.forEach((key) => {

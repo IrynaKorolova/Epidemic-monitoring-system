@@ -173,12 +173,12 @@ table {
 :root {
   --main: #292b33;
   --secondary: #24262e;
-  --additional:#393b42;
+  --additional: #393b42;
   --light: #c6c7c7;
-  --accent1:#ffc538;
-  --accent2:#fafafa;
-  --accent3:#00ba80;
-  --accent4:#f25454;
+  --accent1: #ffc538;
+  --accent2: #fafafa;
+  --accent3: #00ba80;
+  --accent4: #f25454;
 }
 
 .container {
@@ -217,7 +217,7 @@ body {
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
   color: var(--light);
   font-size: 17px;
-  background-color:var(--secondary);
+  background-color: var(--secondary);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -348,7 +348,8 @@ span {
   flex-direction: row;
   user-select: none;
 }
-.dashboard__sort-btn:not(:first-child){
+
+.dashboard__sort-btn:not(:first-child) {
   justify-content: center;
 }
 
